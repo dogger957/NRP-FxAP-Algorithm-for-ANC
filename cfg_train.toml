@@ -1,0 +1,37 @@
+[DDP]
+world_size = 2   # number of available gpus
+
+[optimizer]
+lr = 1e-4
+
+[train_dataset] 
+annotations_file= '/data/ssd0/yiming.he/dataset/RNC/ann/train.csv'
+wave_length=0
+norm=0
+
+[train_dataloader]
+batch_size = 4
+num_workers = 0
+drop_last = true
+pin_memory = true
+
+[validation_dataset]
+train_folder = '/data/ssd0/yiming.he/dataset/RNC'
+shuffle = false
+num_tot = 0
+wav_len = 0
+
+[validation_dataloader]
+batch_size = 1
+num_workers = 4
+pin_memory = true
+
+[trainer]
+epochs = 60
+save_checkpoint_interval = 1
+clip_grad_norm_value = 10.0
+exp_path = '/data/ssd0/yiming.he/model/Ref1/all_speed/exp_wavenet_6chn/loss10'
+resume = false
+resume_datetime = ''
+resume_step = 0
+
