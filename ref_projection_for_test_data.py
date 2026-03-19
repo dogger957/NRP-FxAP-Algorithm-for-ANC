@@ -34,7 +34,7 @@ model.eval()
 
 waveform,fs = torchaudio.load(test_name)
 waveform = waveform.unsqueeze(0).to(device) # [1,1,fs*seg_len]
-noise = waveform[:,[58,60],:]
+noise = waveform[:,[42,43],:]
 length = waveform.size(-1)
 seg_len=30          
 ## Inputting the entire recording directly is too large and may cause insufficient memory. 
@@ -52,7 +52,7 @@ with torch.no_grad():
 
         end_idx = min((i+1)*seg_len*fs, length)
         ref = waveform[:, 0:42, start_idx:end_idx]
-        d = waveform[:, [58,60], start_idx:end_idx]
+        d = waveform[:, [42,43], start_idx:end_idx]
         err,auto_corr,cross_corr,out = model(ref,d)
         loss1,loss2,loss3,loss0 = loss_fn(err,d,auto_corr,cross_corr)
         print('loss1:{:.4f}, loss2:{:.4f}, loss3:{:.4f}, loss0:{:.4f}'.format(loss1,loss2,loss3,loss0))
